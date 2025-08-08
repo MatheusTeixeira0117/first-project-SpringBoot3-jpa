@@ -8,9 +8,11 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.mydomini.courseJava.entities.Category;
 import com.mydomini.courseJava.entities.Order;
 import com.mydomini.courseJava.entities.User;
 import com.mydomini.courseJava.entities.enums.OrderStatus;
+import com.mydomini.courseJava.repositories.CategoryRepository;
 import com.mydomini.courseJava.repositories.OrderRepository;
 import com.mydomini.courseJava.repositories.UserRepository;
 
@@ -24,9 +26,18 @@ public class TestConfig implements CommandLineRunner{
 	
 	@Autowired
 	private OrderRepository orderRepository;
+	
+	@Autowired
+	private CategoryRepository catogoryRespository;
 
 	@Override
 	public void run(String... args) throws Exception {
+		
+		Category cat1 = new Category(null, "Electronics");
+		Category cat2 = new Category(null, "Books");
+		Category cat3 = new Category(null, "Computers"); 
+
+		
 		
 		User u1 = new User(null, "Matheus", "matheus@gmail.com", "11923445577", "12345");
 		User u2 = new User(null, "Larissa", "larissa@gmail.com", "11923557799", "54321");
@@ -38,6 +49,7 @@ public class TestConfig implements CommandLineRunner{
 		Order o4 = new Order(null, Instant.parse("2019-07-22T15:21:22Z"), OrderStatus.DELIVERED, u1); 
 		
 		
+		catogoryRespository.saveAll(Arrays.asList(cat1,cat2,cat3));
 		userRepository.saveAll(Arrays.asList(u1,u2,u3));
 		orderRepository.saveAll(Arrays.asList(o1,o2,o3,o4));
 		
