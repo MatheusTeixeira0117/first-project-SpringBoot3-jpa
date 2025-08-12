@@ -14,7 +14,7 @@ import com.mydomini.courseJava.services.ProductService;
 
 
 @RestController
-@RequestMapping("/Producteis")
+@RequestMapping("/products")
 public class ProductResouces {
 	
 	@Autowired

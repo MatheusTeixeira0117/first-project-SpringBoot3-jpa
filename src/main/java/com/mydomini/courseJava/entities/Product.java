@@ -9,8 +9,10 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.JoinTable;
+import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
-import jakarta.persistence.Transient;
 @Entity
 @Table(name = "tb_product")
 public class Product implements Serializable{
@@ -25,8 +27,9 @@ public class Product implements Serializable{
 	private Double price;
 	private String imgUrl;
 	
-	@Transient
-	private Set<Category> catogories = new HashSet<>();
+	@ManyToMany
+	@JoinTable(name = "tb_pruduct_catogory", joinColumns = @JoinColumn(name = "product_id"), inverseJoinColumns = @JoinColumn(name = "category_id"))
+	private Set<Category> categories = new HashSet<>();
 	
 	public Product() {		
 	}
@@ -80,7 +83,7 @@ public class Product implements Serializable{
 	}
 
 	public Set<Category> getCatogories() {
-		return catogories;
+		return categories;
 	}
 
 	@Override
