@@ -25,7 +25,7 @@ public class OrderResources {
 		return ResponseEntity.ok().body(list);
 	}
 	
-	@GetMapping(value = "/{id}")
+	@GetMapping(value = "/{Id}")
 	public ResponseEntity<Order> findById(@PathVariable Long id){
 		Order obj = service.findById(id);
 		return ResponseEntity.ok().body(obj);
