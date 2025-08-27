@@ -12,6 +12,8 @@ import com.mydomini.courseJava.repositories.UserRepository;
 import com.mydomini.courseJava.services.exceptions.DatabaseException;
 import com.mydomini.courseJava.services.exceptions.ResourceNotFoundException;
 
+import jakarta.persistence.EntityNotFoundException;
+
 @Service
 public class UserService {
 	
@@ -43,9 +45,13 @@ public class UserService {
 	}
 	
 	public User update(Long id, User obj) {
+		try {
 		User entity = repository.getReferenceById(id);
 		upadeData(entity,obj);
 		return repository.save(entity);
+	   }catch(EntityNotFoundException e) {
+		   throw new ResourceNotFoundException(id);
+	   }
 	}
 
 	private void upadeData(User entity, User obj) {
